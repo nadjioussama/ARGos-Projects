@@ -35,7 +35,7 @@ def distance(Xa, Ya,  Xb, Yb):
 
 
 
-with open("dispertion.csv", "r") as csvfile:
+with open("dispersion.csv", "r") as csvfile:
     reader = csv.reader(csvfile, delimiter=" ")
     for i, line in enumerate(reader):
 
@@ -137,10 +137,14 @@ distance_to_gravity_center_group = [
 avg_distance_to_gravity_center = [(sum(column)/20) for column in zip(*distance_to_gravity_center_group)]
 
 Rs = 0.17
-dispertion = [((elem)/(4*Rs**2)) for elem in avg_distance_to_gravity_center]
+dispersion = [((elem)/(4*Rs**2)) for elem in avg_distance_to_gravity_center]
 
-time = range(1, len(dispertion)+1)
+with open('dispersion_list.csv', 'w') as dispersion_list_file:
+    for elem in dispersion:
+         dispersion_list_file.write(str(elem) + "\n")
 
-plt.plot(time, dispertion)
+time = range(1, len(dispersion)+1)
+
+plt.plot(time, dispersion)
 
 plt.show()
